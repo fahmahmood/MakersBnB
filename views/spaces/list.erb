@@ -1,0 +1,15 @@
+
+
+
+  <form action="/spaces/new" method="get">
+    <input id='list_space_button' type="submit"value="List a Space">
+  </form>
+
+
+<div id='space_list_container'>
+  <ul id="spaces">
+    <% @spaces.each do |space| %>
+    <li><a href="/spaces/details/<%= space.id %>"><%= space.name.capitalize %></a></li>
+    <% end %>
+  </ul>
+</div>

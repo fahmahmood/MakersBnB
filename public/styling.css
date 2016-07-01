@@ -1,0 +1,58 @@
+html {
+  font-family: 'Slabo 27px', serif;
+}
+
+body {
+  background-color: lightgrey;
+}
+
+span#welcome {
+  display: inline-block;
+  float: left;
+  font-size: 30px;
+}
+
+img {
+  width: 70px;
+
+}
+
+div.header_buttons {
+  display: inline-block;
+  float: right;
+  margin: 0px 5px;
+}
+
+#heading{
+  font-size: 30px;
+  text-align: left;
+}
+
+a {
+  padding-left: 2px;
+  padding-right: 3px;
+}
+
+input#list_space_button {
+  display: block;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#space_list_container {
+  width: 50%;
+  border: 1px solid black;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: grey;
+}
+
+.space_list_form_items {
+  display: inline-block;
+  float: right;
+  clear: left;
+  /*margin-left: auto;*/
+
+}

@@ -1,0 +1,50 @@
+<h4><%= @current_space.name %></h4>
+Description: <%= @current_space.description %><br>
+Price: <%= @current_space.price %><br>
+Available from: <%= @current_space.available_from %><br>
+Available to: <%= @current_space.available_until %><br><br>
+
+<form action='/requests' method='post'>
+  Date required: <input id="check_in_date" type="text" name="check_in_date">
+  <input id="space_id" type="hidden" value="<%=@current_space.id%>" name="space_id">
+  <input type="submit" value="Request space">
+</form>
+
+<script>
+
+  var unavailableDates = [""]; //list of dates in which the space is not available
+  var minDate = new Date("<%= @current_space.available_from.strftime %>");
+  var maxDate = new Date("<%= @current_space.available_until.strftime%>");
+
+
+  function prettyDate( date ) {
+    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+    return  y + '-' + (m+1) + '-' + d;
+  }
+
+  function isUnavailableDate( date ) {
+    return ($.inArray(prettyDate( date ), unavailableDates) != -1 ||
+            new Date() >= date ||
+            date < minDate ||
+            date > maxDate )
+  }
+
+  function removeUnavailableDates( date ) {
+    for(var i = 0; i < unavailableDates.length; i++) {
+      if(isUnavailableDate( date )){
+        return [false];
+      }
+    }
+    return [true];
+  }
+
+  $(document).ready(function() {
+    $( "#check_in_date" ).datepicker({
+      dateFormat: 'dd/mm/yy',
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      beforeShowDay: removeUnavailableDates
+    });
+  });
+</script>

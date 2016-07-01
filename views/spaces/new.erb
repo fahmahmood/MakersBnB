@@ -1,0 +1,44 @@
+
+<html>
+<head>
+  <title>List Space</title>
+  <div id='heading'>List Your Space</div>
+</head>
+
+
+<body>
+  <div id='space_list_container'>
+    <form id='space_list_form' action="/spaces" method="post">
+      <label>Name:</label><input class='space_list_form_items' type="text" name="name"><br>
+      <label>Price per night:</label><input class='space_list_form_items' type="text" name="price"><br>
+      <label>Description:</label><input class='space_list_form_items' type="text" name="description"><br>
+      <label>Available From:</label><input class='space_list_form_items' id="available_from" type="text" name="available_from"><br>
+      <label>Available Until:</label><input class='space_list_form_items' id="available_until" type="text" name="available_until"><br>
+      <input type="submit" value="List this space">
+    </form>
+
+    <script>
+    $(function() {
+      $( "#available_from" ).datepicker({
+        minDate: <%= Date.today.strftime("%d/%m/%Y") %>,
+        dateFormat: 'dd/mm/yy',
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onClose: function( selectedDate ) {
+          $ ( "#available_until" ).datepicker( "option", "minDate", selectedDate );
+        }
+      });
+      $( "#available_until" ).datepicker({
+        dateFormat: 'dd/mm/yy',
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onClose: function( selectedDate ) {
+          $ ( "#available_from" ).datepicker( "option", "maxDate", selectedDate );
+        }
+      });
+    });
+    </script>
+  </body>
+</html>

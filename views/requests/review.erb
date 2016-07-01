@@ -1,0 +1,9 @@
+<h1>Request for '<%= @space.name %>'</h1>
+
+From: <%= @requester.email %>
+Date: <%= @request_review.check_in_date %>
+
+<form action="/requests/confirm" method="post">
+  <input type="hidden" name="request_id" value="<%= @request_review.id %>">
+  <input type="submit" value="Confirm Request">
+</form>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Makers BnB</title>
+
+    <link rel='stylesheet' type='text/css' href='/styling.css'>
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  </head>
+  <body>
+
+
+  <!-- ========== Header ============== -->
+
+  <% if current_user %>
+    <span id='welcome'>Welcome to MakersBnB, <%= current_user.email %>
+      <img src='https://cdn-images-1.medium.com/max/800/1*toMWOx-GvP6WSiFLMlHMfQ.png'>
+    </span>
+    <div class='header_buttons'>
+      <a href="/spaces" class='header_buttons'>Spaces</a>|
+      <a href="/requests" class='header_buttons'>Requests</a>|
+      <a href="/sessions/end" class='header_buttons'>Log out</a>
+    </div>
+  <% else %>
+    <div class='header_buttons'><a href="/sessions/new" class='header_buttons'>Log in</a></div>
+  <% end %>
+
+  <!-- ========== Errors ============== -->
+
+    <% if flash[:notice] %>
+    <%= flash[:notice] %>
+    <% end %>
+    <% if flash[:errors] && !flash[:errors].empty? %>
+    PLease refer to the following errors below:
+    <ul id='errors'>
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
+    <br>
+    <br>
+    <%= yield %>
+  </body>
+</html>
